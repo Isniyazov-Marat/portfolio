@@ -1,0 +1,1 @@
+document.addEventListener('DOMContentLoaded',()=>{const p=(location.pathname.split('/').pop()||'index.html');document.querySelectorAll('.menu a').forEach(a=>{const h=a.getAttribute('href');if(h&&h.endsWith(p))a.classList.add('active');});});
