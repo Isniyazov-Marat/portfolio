@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>ウラルスク — インフォグラフィック</title>
+  <style>
+    :root{--bg:#0b0f14;--panel:#0f141b;--text:#e9f0f5;--muted:#b6c2d0;--line:rgba(255,255,255,.12);--max:#ef4444;--min:#3b82f6}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:#0b0f14;color:#e9f0f5;line-height:1.6}
+    .container{max-width:1000px;margin:0 auto;padding:24px}
+    h1{margin:0 0 16px} h2{margin:12px 0}
+    a{color:#60a5fa;text-decoration:none}
+    .chart{border:1px solid var(--line);border-radius:12px;padding:16px;background:#0f141b;margin:16px 0}
+    .legend{display:flex;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:14px;margin-bottom:8px}
+    .legend .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+    .axis{stroke:rgba(255,255,255,.35)} .frame{fill:none;stroke:rgba(255,255,255,.18)}
+    .bar{position:relative;height:24px;margin:30px 0 22px;border-radius:8px;background:rgba(34,197,94,.18);overflow:hidden}
+    .bar label{position:absolute;left:10px;top:-22px;color:var(--muted);font-size:12px}
+    .bar span{position:absolute;left:0;top:0;height:100%;background:linear-gradient(90deg,#22c55e,#60a5fa);width:0}
+    .bar .val{position:absolute;right:8px;top:0;height:100%;display:flex;align-items:center;font-size:12px;color:#fff;font-weight:600;text-shadow:0 1px 1px rgba(0,0,0,.4)}
+    footer{color:var(--muted);font-size:13px;margin-top:18px}
+    .back{margin-bottom:8px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <p class="back"><a href="index.html">← 戻る</a></p>
+    <h1>ウラルスク — インフォグラフィック</h1>
+
+    <div class="legend">
+      <span><span class="dot" style="background:var(--max)"></span>最高気温</span>
+      <span><span class="dot" style="background:var(--min)"></span>最低気温</span>
+    </div>
+
+    <section class="chart">
+      <h2>人口の推移（デモデータ）</h2>
+      <div class="bar"><label>2010</label><span data-value="260"></span><strong class="val"></strong></div>
+      <div class="bar"><label>2015</label><span data-value="290"></span><strong class="val"></strong></div>
+      <div class="bar"><label>2020</label><span data-value="320"></span><strong class="val"></strong></div>
+      <div class="bar"><label>2024</label><span data-value="350"></span><strong class="val"></strong></div>
+    </section>
+
+    <section class="chart">
+      <h2>月別気温（°C）</h2>
+      <!-- 左側のYラベル用に少し広いviewBox -->
+      <svg id="lineChart" viewBox="0 0 720 260" preserveAspectRatio="xMidYMid meet">
+        <!-- グラフ領域 40..640 -->
+        <rect x="40" y="20" width="600" height="200" class="frame"/>
+        <line x1="40" y1="220" x2="640" y2="220" class="axis"/>
+        <line x1="40" y1="20"  x2="40"  y2="220" class="axis"/>
+
+        <!-- 水平グリッド -->
+        <g stroke="rgba(255,255,255,.15)">
+          <line x1="40" x2="640" y1="220" y2="220"/>
+          <line x1="40" x2="640" y1="180" y2="180"/>
+          <line x1="40" x2="640" y1="140" y2="140"/>
+          <line x1="40" x2="640" y1="100" y2="100"/>
+          <line x1="40" x2="640" y1="60"  y2="60"/>
+          <line x1="40" x2="640" y1="20"  y2="20"/>
+        </g>
+
+        <!-- Y軸ラベル（-20..30） -->
+        <g fill="#b6c2d0" font-size="12" text-anchor="end">
+          <text x="34" y="224">-20</text>
+          <text x="34" y="184">-10</text>
+          <text x="34" y="144">0</text>
+          <text x="34" y="104">10</text>
+          <text x="34" y="64">20</text>
+          <text x="34" y="24">30</text>
+        </g>
+
+        <!-- 月名 -->
+        <g fill="#b6c2d0" font-size="12">
+          <text x="60"  y="240">1月</text><text x="105" y="240">2月</text>
+          <text x="150" y="240">3月</text><text x="195" y="240">4月</text>
+          <text x="240" y="240">5月</text><text x="285" y="240">6月</text>
+          <text x="330" y="240">7月</text><text x="375" y="240">8月</text>
+          <text x="420" y="240">9月</text><text x="465" y="240">10月</text>
+          <text x="510" y="240">11月</text><text x="555" y="240">12月</text>
+        </g>
+
+        <!-- 折れ線 -->
+        <polyline id="maxLine" fill="none" stroke="var(--max)" stroke-width="3" points=""/>
+        <polyline id="minLine" fill="none" stroke="var(--min)" stroke-width="3" points=""/>
+      </svg>
+    </section>
+
+    <footer>データはデモ用です。1年分（1月〜12月）の最高/最低気温と、人口推移の数値を表示しています。</footer>
+  </div>
+
+  <script>
+    // ==== 設定 ====
+    const MAX_BAR = 400;          // 人口バーの最大スケール（260–350想定）
+    const YMIN = -20, YMAX = 30;  // ウラルスクの気温スケール
+    const X0 = 60, STEP = 45, YH = 200, Y0 = 220;
+
+    // 月別気温（°C）12個
+    const MAX_TEMPS = [-6,-5,3,12,20,25,28,27,19,10,2,-3];
+    const MIN_TEMPS = [-14,-13,-7,1,7,12,15,14,7,1,-6,-11];
+
+    // ==== バー（幅 + 数値）====
+    document.querySelectorAll('.bar').forEach((bar,i)=>{
+      const span = bar.querySelector('span');
+      const val  = bar.querySelector('.val');
+      const v = Number(span.getAttribute('data-value') || 0);
+      const pct = Math.min(100, (v / MAX_BAR) * 100);
+      span.style.width = pct + '%';
+      if (span.animate) span.animate([{width:'0%'},{width:pct+'%'}], {duration:900 + i*180, fill:'forwards'});
+      if (val) val.textContent = v.toLocaleString('ja-JP');
+    });
+
+    // ==== 折れ線グラフ ====
+    function toPoints(arr){
+      return arr.map((t,i)=>{
+        const x = X0 + STEP*i;
+        const y = Y0 - ((t - YMIN) / (YMAX - YMIN)) * YH;
+        return x+','+y.toFixed(1);
+      }).join(' ');
+    }
+    const maxLine = document.getElementById('maxLine');
+    const minLine = document.getElementById('minLine');
+    if (maxLine && minLine){
+      maxLine.setAttribute('points', toPoints(MAX_TEMPS));
+      minLine.setAttribute('points', toPoints(MIN_TEMPS));
+      if (maxLine.animate) maxLine.animate([{strokeDasharray:'0 900'},{strokeDasharray:'900 0'}], {duration:1400, fill:'forwards'});
+      if (minLine.animate) minLine.animate([{strokeDasharray:'0 900'},{strokeDasharray:'900 0'}], {duration:1400, delay:120, fill:'forwards'});
+    }
+  </script>
+</body>
+</html>

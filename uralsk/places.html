@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>ウラルスク — 名所</title>
+<link rel="stylesheet" href="assets/style.css"/>
+</head>
+<body>
+<header class="header">
+  <div class="container nav">
+    <div class="brand">
+      <div class="logo">KZ</div><span>ウラルスク — 市のサイト</span>
+    </div>
+    <nav class="menu">
+      <a class="btn" href="index.html">ホーム</a>
+      <a class="btn" href="places.html">名所</a>
+      <a class="btn" href="infographic.html">インフォグラフィック</a>
+      <a class="btn" href="history.html">歴史</a>
+      <a class="btn" href="contact.html">連絡先</a>
+    </nav>
+    <div class="lang"><a class="btn" href="/portfolio/">私のポートフォリオ</a></div>
+  </div>
+</header>
+
+<main class="container section">
+  <div class="breadcrumbs"><a href="index.html">ホーム</a> / 名所</div>
+  <h1>ウラルスクの名所</h1>
+
+  <div class="cards">
+    <!-- ムゼイ・ガブドゥッラ・トゥカイ -->
+    <article class="card"><div class="content">
+      <img src="assets/img/uralsk-tukay.jpg" alt="ガブドゥッラ・トゥカイ博物館">
+      <h3>ガブドゥッラ・トゥカイ博物館</h3>
+      <p>タタールの詩人ガブドゥッラ・トゥカイに捧げられた博物館。彼はウラルスクで学び、生活していた。展示は20世紀初頭の雰囲気を再現している。</p>
+    </div></article>
+
+    <!-- 郷土史博物館 -->
+    <article class="card"><div class="content">
+      <img src="assets/img/uralsk-history-museum.jpg" alt="ウラルスク郷土史博物館">
+      <h3>州立歴史・郷土博物館</h3>
+      <p>西カザフスタンで最も重要な博物館。カザフ民族の文化、生活、歴史を物語る貴重な展示品が揃っている。</p>
+    </div></article>
+
+    <!-- ミハイロ＝アルハンゲリスキー大聖堂 -->
+    <article class="card"><div class="content">
+      <img src="assets/img/uralsk-old-cathedral.jpg" alt="ウラルスクの古い聖堂">
+      <h3>ミハイロ＝アルハンゲリスキー大聖堂</h3>
+      <p>カザフスタンで最も古い教会の一つ。1741年に建立された。ウラルスクの精神的歴史を象徴する建築物。</p>
+    </div></article>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">© <span id="year"></span> 学習プロジェクト</div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+document.addEventListener('DOMContentLoaded', () => {
+  const p = (location.pathname.split('/').pop() || 'index.html');
+  document.querySelectorAll('.menu a').forEach(a => {
+    const h = a.getAttribute('href');
+    if (h && h.endsWith(p)) a.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

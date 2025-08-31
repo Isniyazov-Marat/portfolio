@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>ウラルスク — 歴史</title>
+<link rel="stylesheet" href="assets/style.css"/>
+</head>
+<body>
+<header class="header">
+  <div class="container nav">
+    <div class="brand"><div class="logo">KZ</div><span>ウラルスク — 市のサイト</span></div>
+    <nav class="menu">
+      <a class="btn" href="index.html">ホーム</a>
+      <a class="btn" href="facts.html">豆知識</a>
+      <a class="btn" href="infographic.html">インフォグラフィック</a>
+      <a class="btn" href="history.html">歴史</a>
+      <a class="btn" href="contact.html">連絡先</a>
+    </nav>
+    <div class="lang"><a class="btn" href="/portfolio/">私のポートフォリオ</a></div>
+  </div>
+</header>
+
+<main class="container section">
+  <div class="breadcrumbs"><a href="index.html">ホーム</a> / 歴史</div>
+   <section class="section">
+  <h2>ウラルスクの歴史</h2>
+  <div class="tiles">
+    <div class="tile">
+      <h3>創設</h3>
+      <p>ウラル川沿いの都市は16～17世紀から国境防衛と交易の重要な拠点として知られていた。</p>
+    </div>
+    <div class="tile">
+      <h3>カザーク集落</h3>
+      <p>長い間ウラル・コサック軍の中心地として、要塞線や職人文化、近隣諸国との交流が発展した。</p>
+    </div>
+    <div class="tile">
+      <h3>19世紀〜20世紀初頭</h3>
+      <p>交易の拡大、石造建築、行政施設、学校や宗教施設の整備が進んだ。</p>
+    </div>
+    <div class="tile">
+      <h3>現代</h3>
+      <p>今日では西カザフスタン州の行政中心地であり、ヨーロッパとアジアをつなぐ工業・文化の拠点となっている。</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer"><div class="container">© <span id="year"></span> 学習プロジェクト</div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const p=(location.pathname.split('/').pop()||'index.html');
+  document.querySelectorAll('.menu a').forEach(a=>{
+    const h=a.getAttribute('href');
+    if(h && h.endsWith(p)) a.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
