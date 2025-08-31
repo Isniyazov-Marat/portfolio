@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>スキル — ポートフォリオ</title>
+  <link rel="stylesheet" href="assets/style.css"/>
+</head>
+<body>
+
+<header class="header">
+  <div class="container nav">
+    <div class="brand">
+      <div class="logo">KZ</div>
+      <span>ウェブデザイナーのポートフォリオ</span>
+    </div>
+    <nav class="menu">
+      <a class="btn" href="index.html">自己紹介</a>
+      <a class="btn" href="projects.html">プロジェクト</a>
+      <a class="btn" href="skills.html">スキル</a>
+      <a class="btn" href="contacts.html">連絡先</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container section">
+  <h1>スキル</h1>
+  <div class="tiles">
+    <div class="tile"><strong>HTML5</strong><br/>セマンティクス、ariaラベル、構造設計。</div>
+    <div class="tile"><strong>CSS</strong><br/>Flex/Grid、レスポンシブ、hover効果、基本的なアニメーション。</div>
+    <div class="tile"><strong>JavaScript</strong><br/>簡単なインタラクション（モーダル、タブ、フィルター）。</div>
+    <div class="tile"><strong>ツール</strong><br/>Git/GitHub、XAMPP、VS Code。</div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">© <span id="year"></span> ポートフォリオ</div>
+</footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+<script src="assets/app.js"></script>
+
+</body>
+</html>

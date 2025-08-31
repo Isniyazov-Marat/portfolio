@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>プロジェクト — ポートフォリオ</title>
+  <link rel="stylesheet" href="assets/style.css"/>
+</head>
+<body>
+
+<header class="header">
+  <div class="container nav">
+    <div class="brand">
+      <div class="logo">KZ</div>
+      <span>ウェブデザイナーのポートフォリオ</span>
+    </div>
+    <nav class="menu">
+      <a class="btn" href="index.html">自己紹介</a>
+      <a class="btn" href="projects.html">プロジェクト</a>
+      <a class="btn" href="skills.html">スキル</a>
+      <a class="btn" href="contacts.html">連絡先</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container section">
+  <h1>プロジェクト</h1>
+  <div class="cards">
+    <article class="card">
+      <div class="content">
+        <h3>アルマトイ — 都市サイト</h3>
+        <p>マルチページ構成：ホーム、都市紹介、名所（メデウ／コクトベ／緑のバザール）、連絡先。</p>
+        <a class="btn" href="almaty/index.html">開く</a>
+      </div>
+    </article>
+    <article class="card">
+      <div class="content">
+        <h3>アスタナ — モバイルガイド</h3>
+        <p>モバイル画面向けWebインターフェース：カテゴリ → リスト → 名所ページ。</p>
+        <a class="btn" href="astana/index.html">開く</a>
+      </div>
+    </article>
+    <article class="card">
+      <div class="content">
+        <h3>ウラルスク — 情報ページ</h3>
+        <p>主要な事実、シンプルなチャート、データブロック。</p>
+        <a class="btn" href="uralsk/index.html">開く</a>
+      </div>
+    </article>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">© <span id="year"></span> ポートフォリオ</div>
+</footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+<script src="assets/app.js"></script>
+
+</body>
+</html>

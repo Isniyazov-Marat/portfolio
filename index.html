@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>自己紹介 — ポートフォリオ</title>
+  <link rel="stylesheet" href="assets/style.css"/>
+</head>
+<body>
+
+<header class="header">
+  <div class="container nav">
+    <div class="brand">
+      <div class="logo">KZ</div>
+      <span>ウェブデザイナーのポートフォリオ</span>
+    </div>
+    <nav class="menu">
+      <a class="btn" href="index.html">自己紹介</a>
+      <a class="btn" href="projects.html">プロジェクト</a>
+      <a class="btn" href="skills.html">スキル</a>
+      <a class="btn" href="contacts.html">連絡先</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container hero">
+  <h1>こんにちは！初心者のウェブデザイナー／コーダーです</h1>
+  <p class="lead">分かりやすいインターフェース、整ったタイポグラフィ、クリーンなコーディングを作ります。目標は日本でインターン／就職を見つけることです。</p>
+  <div class="badges">
+    <span class="badge">HTML</span><span class="badge">CSS</span><span class="badge">JavaScript</span>
+  </div>
+
+  <section class="section">
+    <h2>できること</h2>
+    <div class="tiles">
+      <div class="tile"><strong>コーディング</strong><br/>セマンティックHTML5、レスポンシブ、グリッド。</div>
+      <div class="tile"><strong>デザイン</strong><br/>シンプルでクリーンなUI、余計な装飾なし。</div>
+      <div class="tile"><strong>UIパターン</strong><br/>カード、モーダルウィンドウ、ヘッダー／フッター。</div>
+      <div class="tile"><strong>ツール</strong><br/>VS Code、Git/GitHub、XAMPP。</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>現在取り組んでいること</h2>
+    <p>カザフスタンの都市に関する学習プロジェクトを制作中：アルマトイ（サイト）、アスタナ（モバイルガイド）、ウラルスク（情報ページ）。単なる画像ではなく、きちんとしたサイトになるよう心がけています。</p>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">© <span id="year"></span> ポートフォリオ</div>
+</footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+<script src="assets/app.js"></script>
+
+</body>
+</html>
